@@ -1,0 +1,7 @@
+changelog_display.changelog:
+  path: '/changelog'
+  defaults:
+    _controller: '\Drupal\changelog_display\Controller\ChangelogDisplayController::changelog'
+    _title: 'Changelog'
+  requirements:
+    _role: 'authenticated'
