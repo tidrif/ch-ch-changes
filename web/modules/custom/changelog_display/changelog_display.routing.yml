@@ -5,3 +5,5 @@ changelog_display.changelog:
     _title: 'Changelog'
   requirements:
     _permission: 'view the administration theme'
+  options:
+    _admin_route: TRUE
