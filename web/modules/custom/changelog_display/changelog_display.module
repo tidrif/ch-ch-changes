@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains changelog_display.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function changelog_display_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the changelog_display module.
+    case 'help.page.changelog_display':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Detects Changelog changes and notifies users of updates') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function changelog_display_theme() {
+  return [
+    'changelog_display' => [
+      'render element' => 'children',
+    ],
+  ];
+}

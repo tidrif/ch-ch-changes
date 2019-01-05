@@ -1,0 +1,14 @@
+{
+  "name": "drupal/changelog_display",
+  "type": "drupal-module",
+  "description": "Detects Changelog changes and notifies users of updates",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/changelog_display",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/changelog_display",
+    "source": "http://cgit.drupalcode.org/changelog_display"
+  },
+  "require": { }
+}
