@@ -1,0 +1,5 @@
+services:
+  changelog_display.route_subscriber:
+    class: Drupal\changelog_display\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
