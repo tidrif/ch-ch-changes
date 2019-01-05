@@ -4,4 +4,4 @@ changelog_display.changelog:
     _controller: '\Drupal\changelog_display\Controller\ChangelogDisplayController::changelog'
     _title: 'Changelog'
   requirements:
-    _role: 'authenticated'
+    _permission: 'view the administration theme'
