@@ -1,0 +1,6 @@
+changelog_display.changelog:
+  title: 'Changelog'
+  route_name: 'changelog_display.changelog'
+  weight: 100
+  menu_name: admin
+  parent: system.admin
