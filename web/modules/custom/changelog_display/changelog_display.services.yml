@@ -3,3 +3,7 @@ services:
     class: Drupal\changelog_display\Routing\RouteSubscriber
     tags:
       - { name: event_subscriber }
+  changelog_display.webhook_access_check:
+    class: Drupal\changelog_display\Access\WebhookAccessCheck
+    tags:
+      - { name: access_check, applies_to: _webhook_access_check }

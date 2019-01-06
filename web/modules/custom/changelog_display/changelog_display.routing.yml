@@ -7,3 +7,10 @@ changelog_display.changelog:
     _permission: 'view the administration theme'
   options:
     _admin_route: TRUE
+changelog_display.changelog_update:
+  path: '/changelog_update'
+  defaults:
+    _controller: '\Drupal\changelog_display\Controller\ChangelogDisplayController::changelogUpdate'
+    _title: 'Webhook Controller'
+  requirements:
+    _webhook_access_check: 'TRUE'
