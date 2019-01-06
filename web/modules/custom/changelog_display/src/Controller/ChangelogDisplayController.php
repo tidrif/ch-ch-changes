@@ -3,7 +3,6 @@
 namespace Drupal\changelog_display\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Access\AccessResult;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,7 +30,9 @@ class ChangelogDisplayController extends ControllerBase {
    * @return array
    *  Returns a success response when received
    */
-  public function changelogUpdate() {
+  public function changelogUpdate(Request $request) {
+
+
     return [
       '#type' => 'markup',
       '#markup' => $this->t('hello'),

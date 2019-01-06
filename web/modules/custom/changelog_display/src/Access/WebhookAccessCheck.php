@@ -18,22 +18,32 @@ class WebhookAccessCheck implements AccessInterface{
    *   Run access checks for this account.
    */
   public function access(Request $request) {
-    $payload = $request->getContent();
 
-    if (empty($payload)) {
-      return AccessResult::forbidden();
+    if ($request->isMethod('post')) {
+      $payload = $request->getContent();
+      if (empty($payload)) {
+        return AccessResult::forbidden();
+      }
+      else {
+        $webhookSecret = $this->getWebhookSecret();
+        $hubSignature = $request->headers->get('x-hub-signature');
+        list($algo, $hash) = explode('=', $hubSignature, 2);
+        $payloadHash = hash_hmac($algo, $payload, $webhookSecret);
+
+        if ($hash === $payloadHash) {
+          return AccessResult::allowed();
+        }
+      }
     }
     else {
-      $webhookSecret = $this->getWebhookSecret();
-      $hubSignature = $request->headers->get('x-hub-signature');
-      list($algo, $hash) = explode('=', $hubSignature, 2);
-      $payloadHash = hash_hmac($algo, $payload, $webhookSecret);
-
-      if ($hash === $payloadHash) {
+      $user = \Drupal::currentUser();
+      if ($user->hasPermission('update changelog from github')) {
         return AccessResult::allowed();
       }
-      return AccessResult::forbidden();
     }
+
+    return AccessResult::forbidden();
+
   }
 
   /**
