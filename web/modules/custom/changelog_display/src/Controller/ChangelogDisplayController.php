@@ -18,9 +18,15 @@ class ChangelogDisplayController extends ControllerBase {
    *  Return Changelog string.
    */
   public function changelog() {
+    $parsedown = new \Parsedown();
+    $changelog = \Drupal::getContainer()
+      ->get('config.factory')
+      ->getEditable('changelog_display.settings')
+      ->get('changelog_contents');
+
     return [
       '#type' => 'markup',
-      '#markup' => $this->t('This is the changelog'),
+      '#markup' => $parsedown->text($changelog),
     ];
   }
 
@@ -31,12 +37,25 @@ class ChangelogDisplayController extends ControllerBase {
    *  Returns a success response when received
    */
   public function changelogUpdate(Request $request) {
+    $changelog = \Drupal::getContainer()->get('config.factory')->getEditable('changelog_display.settings')
+      ->get('changelog_contents');
+    $new_changelog = file_get_contents('https://raw.githubusercontent.com/tidrif/ch-ch-changes/master/CHANGELOG.md');
+    if (!empty($new_changelog) && ($changelog !== $new_changelog)) {
+      \Drupal::getContainer()->get('config.factory')->getEditable('changelog_display.settings')
+        ->set('changelog_contents', $new_changelog)
+        ->save();
 
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('Changelog updated!'),
+      ];
+    }
 
     return [
       '#type' => 'markup',
-      '#markup' => $this->t('hello'),
+      '#markup' => $this->t('Changelog not updated'),
     ];
+
   }
 
 }
