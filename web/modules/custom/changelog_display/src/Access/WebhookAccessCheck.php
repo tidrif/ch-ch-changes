@@ -4,6 +4,7 @@ namespace Drupal\changelog_display\Access;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Routing\Access\AccessInterface;
+use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -15,9 +16,9 @@ class WebhookAccessCheck implements AccessInterface{
    * A custom access check.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   Run access checks for this account.
+   *   Run access checks for the request and this account.
    */
-  public function access(Request $request) {
+  public function access(Request $request, AccountInterface $account) {
 
     if ($request->isMethod('post')) {
       $payload = $request->getContent();
@@ -35,11 +36,8 @@ class WebhookAccessCheck implements AccessInterface{
         }
       }
     }
-    else {
-      $user = \Drupal::currentUser();
-      if ($user->hasPermission('update changelog from github')) {
-        return AccessResult::allowed();
-      }
+    elseif ($account->hasPermission('update changelog from github')) {
+      return AccessResult::allowed();
     }
 
     return AccessResult::forbidden();
