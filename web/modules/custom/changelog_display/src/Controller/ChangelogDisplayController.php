@@ -24,6 +24,17 @@ class ChangelogDisplayController extends ControllerBase {
       ->getEditable('changelog_display.settings')
       ->get('changelog_contents');
 
+    // Flag that user viewed the updated changelog.
+    $current_user = \Drupal::currentUser();
+    $user = \Drupal\user\Entity\User::load($current_user->id());
+    $flag_id = 'changelog_viewed';
+    /** @var \Drupal\flag\FlagServiceInterface $flag_service */
+    $flag_service = \Drupal::service('flag');
+    $flag = $flag_service->getFlagById($flag_id);
+    if (!$flag_service->getFlagging($flag, $user)) {
+      $flag_service->flag($flag, $user);
+    }
+
     return [
       '#type' => 'markup',
       '#markup' => $parsedown->text($changelog),
@@ -44,6 +55,13 @@ class ChangelogDisplayController extends ControllerBase {
       \Drupal::getContainer()->get('config.factory')->getEditable('changelog_display.settings')
         ->set('changelog_contents', $new_changelog)
         ->save();
+
+      // Unflag all changelog_viewed flags.
+      $flag_id = 'changelog_viewed';
+      /** @var \Drupal\flag\FlagServiceInterface $flag_service */
+      $flag_service = \Drupal::service($flag_id);
+      $flag = $flag_service->getFlagById($flag_id);
+      $flag_service->unflagAllByFlag($flag);
 
       return [
         '#type' => 'markup',

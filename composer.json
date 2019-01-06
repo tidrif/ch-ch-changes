@@ -23,6 +23,7 @@
         "drupal/console": "^1.0.2",
         "drupal/core": "^8.6.0",
         "drupal/devel": "^1.2",
+        "drupal/flag": "^4.0@alpha",
         "drush/drush": "^9.0.0",
         "erusev/parsedown": "^1.7",
         "vlucas/phpdotenv": "^2.4",

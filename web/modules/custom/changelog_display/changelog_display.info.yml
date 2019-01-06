@@ -3,3 +3,5 @@ type: module
 description: 'Detects Changelog changes and notifies users of updates'
 core: 8.x
 package: 'Custom'
+dependencies:
+  - flag:flag
