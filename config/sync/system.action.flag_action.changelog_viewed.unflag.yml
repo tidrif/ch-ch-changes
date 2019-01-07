@@ -1,0 +1,13 @@
+uuid: d582d814-030d-4599-b795-f1adc938a645
+langcode: en
+status: true
+dependencies:
+  module:
+    - flag
+id: flag_action.changelog_viewed.unflag
+label: 'Reset changelog viewed flag'
+type: user
+plugin: 'flag_action:changelog_viewed.unflag'
+configuration:
+  flag_id: changelog_viewed
+  flag_action: unflag

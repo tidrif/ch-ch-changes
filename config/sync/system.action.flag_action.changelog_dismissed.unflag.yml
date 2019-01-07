@@ -1,0 +1,13 @@
+uuid: d1ef023c-f7f9-4d88-a0cd-72e7b944cb73
+langcode: en
+status: true
+dependencies:
+  module:
+    - flag
+id: flag_action.changelog_dismissed.unflag
+label: 'Undismiss the changelog'
+type: user
+plugin: 'flag_action:changelog_dismissed.unflag'
+configuration:
+  flag_id: changelog_dismissed
+  flag_action: unflag

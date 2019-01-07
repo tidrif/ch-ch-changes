@@ -1,0 +1,13 @@
+uuid: 6429c026-28c5-4383-85b0-e8dc4e0c4dbb
+langcode: en
+status: true
+dependencies:
+  module:
+    - flag
+id: flag_action.changelog_dismissed.flag
+label: 'Dismiss the changelog'
+type: user
+plugin: 'flag_action:changelog_dismissed.flag'
+configuration:
+  flag_id: changelog_dismissed
+  flag_action: flag

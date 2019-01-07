@@ -1,0 +1,30 @@
+uuid: 614b9fc3-b0a1-44df-ba0f-2436b01ebce1
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: changelog_dismissed
+label: 'Changelog dismissed'
+bundles: {  }
+entity_type: user
+global: false
+weight: 0
+flag_short: 'Dismiss the changelog'
+flag_long: ''
+flag_message: ''
+unflag_short: 'Undismiss the changelog'
+unflag_long: ''
+unflag_message: ''
+unflag_denied_text: ''
+flag_type: 'entity:user'
+link_type: reload
+flagTypeConfig:
+  show_in_links: {  }
+  show_as_field: false
+  show_on_form: true
+  show_contextual_link: false
+  extra_permissions:
+    owner: '0'
+  show_on_profile: false
+linkTypeConfig: {  }

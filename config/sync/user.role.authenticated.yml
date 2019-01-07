@@ -1,0 +1,22 @@
+uuid: 01404a51-e0f1-49ba-82d3-e394ed51403e
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access shortcuts'
+  - 'access site-wide contact form'
+  - 'flag changelog_viewed'
+  - 'post comments'
+  - 'search content'
+  - 'skip comment approval'
+  - 'unflag changelog_viewed'
+  - 'use text format basic_html'
+  - 'view the administration theme'

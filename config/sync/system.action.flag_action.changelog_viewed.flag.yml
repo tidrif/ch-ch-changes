@@ -1,0 +1,13 @@
+uuid: e8c64043-a479-4b65-ab87-d18b13ba7120
+langcode: en
+status: true
+dependencies:
+  module:
+    - flag
+id: flag_action.changelog_viewed.flag
+label: 'Changelog viewed'
+type: user
+plugin: 'flag_action:changelog_viewed.flag'
+configuration:
+  flag_id: changelog_viewed
+  flag_action: flag

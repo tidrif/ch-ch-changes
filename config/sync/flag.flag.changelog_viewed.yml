@@ -1,0 +1,30 @@
+uuid: 912a42e2-0e26-4b27-918d-1de48567548c
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: changelog_viewed
+label: 'Changelog viewed'
+bundles: {  }
+entity_type: user
+global: false
+weight: 0
+flag_short: 'Changelog viewed'
+flag_long: ''
+flag_message: ''
+unflag_short: 'Reset changelog viewed flag'
+unflag_long: ''
+unflag_message: ''
+unflag_denied_text: ''
+flag_type: 'entity:user'
+link_type: reload
+flagTypeConfig:
+  show_in_links: {  }
+  show_as_field: false
+  show_on_form: true
+  show_contextual_link: false
+  extra_permissions:
+    owner: '0'
+  show_on_profile: false
+linkTypeConfig: {  }
