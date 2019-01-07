@@ -4,7 +4,7 @@ namespace Drupal\changelog_display\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class ChangelogDisplayController.
@@ -56,12 +56,17 @@ class ChangelogDisplayController extends ControllerBase {
         ->set('changelog_contents', $new_changelog)
         ->save();
 
-      // Unflag all changelog_viewed flags.
-      $flag_id = 'changelog_viewed';
       /** @var \Drupal\flag\FlagServiceInterface $flag_service */
-      $flag_service = \Drupal::service($flag_id);
-      $flag = $flag_service->getFlagById($flag_id);
-      $flag_service->unflagAllByFlag($flag);
+      $flag_service = \Drupal::service('flag');
+
+      $viewed_flag_id = 'changelog_viewed';
+      $viewed_flag = $flag_service->getFlagById($viewed_flag_id);
+
+      $dismissed_flag_id = 'changelog_dismissed';
+      $dismissed_flag = $flag_service->getFlagById($dismissed_flag_id);
+
+      $flag_service->unflagAllByFlag($viewed_flag);
+      $flag_service->unflagAllByFlag($dismissed_flag);
 
       return [
         '#type' => 'markup',
@@ -74,6 +79,31 @@ class ChangelogDisplayController extends ControllerBase {
       '#markup' => $this->t('Changelog not updated'),
     ];
 
+  }
+
+  /**
+   * Changelog Dismiss Controller.
+   *
+   * @return void
+   */
+  public function changelogDismiss() {
+    // Flag that the current user dismissed the changelog message.
+    $current_user = \Drupal::currentUser();
+    $user = \Drupal\user\Entity\User::load($current_user->id());
+    $flag_id = 'changelog_dismissed';
+    /** @var \Drupal\flag\FlagServiceInterface $flag_service */
+    $flag_service = \Drupal::service('flag');
+    $flag = $flag_service->getFlagById($flag_id);
+    if (!$flag_service->getFlagging($flag, $user)) {
+      $flag_service->flag($flag, $user);
+    }
+
+    $previous_url = \Drupal::request()->server->get('HTTP_REFERER');
+    /** @var \Symfony\Component\HttpFoundation\RedirectResponse $response */
+    $response = new RedirectResponse($previous_url);
+    $response->send();
+
+    return;
   }
 
 }

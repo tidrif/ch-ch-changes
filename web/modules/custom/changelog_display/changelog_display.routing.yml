@@ -14,3 +14,9 @@ changelog_display.changelog_update:
     _title: 'Webhook Controller'
   requirements:
     _webhook_access_check: 'TRUE'
+changelog_display.changelog_dismiss:
+  path: '/changelog_dismiss'
+  defaults:
+    _controller: '\Drupal\changelog_display\Controller\ChangelogDisplayController::changelogDismiss'
+  requirements:
+    _permission: 'view the administration theme'
